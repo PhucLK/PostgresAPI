@@ -1,0 +1,43 @@
+{
+  "name": "postgresapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint **/*.ts",
+    "prettier": "prettier --config .prettierrc **/*.ts --write",
+    "build": "npx tsc",
+    "jasmine": "jasmine",
+    "test": "set ENV=test && npx tsc && db-migrate --env test up && jasmine && db-migrate db:drop test",
+    "start": "nodemon src/index.ts",
+    "allin": "npm run build && npm run prettier && npm run lint && npm run jasmine "
+  },
+  "author": "phuctv7",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/jasmine": "^4.0.3",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/node": "^18.0.0",
+    "@types/pg": "^8.6.5",
+    "eslint": "^8.18.0",
+    "jasmine": "^4.2.0",
+    "jasmine-spec-reporter": "^7.0.0",
+    "node": "^17.7.2",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.8.1",
+    "typescipt": "^1.0.0",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "db-migrate-pg": "^1.2.2",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.7.3"
+  }
+}

@@ -1,0 +1,16 @@
+{
+    "dev": {
+      "driver": "pg",
+      "host": "localhost",
+      "database": "phuc_dev",
+      "user": "phuc_dev",
+      "password": "phuc123"
+    },
+    "test": {
+      "driver": "pg",
+      "host": "http://localhost",
+      "database": "phuc_test",
+      "user": "phuc_test",
+      "password": "phuc123"
+    }
+  }

@@ -1,0 +1,19 @@
+{
+    "env": {
+        "node": true
+    },
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "requireConfigFile": false
+    },
+
+    "rules": {
+        "quotes": ["error", "double"],
+        "semi": ["off", "always"],
+        "indent": "off",
+        "comma-dangle": ["error", "never"],
+        "space-before-function-paren": 0
+    },
+    "ignorePatterns": ["./build/*.js", "node_modules", "**/reporter.ts"]
+}
