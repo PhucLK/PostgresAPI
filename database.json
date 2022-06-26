@@ -1,16 +1,16 @@
 {
     "dev": {
-      "driver": "pg",
-      "host": "localhost",
-      "database": "phuc_dev",
-      "user": "phuc_dev",
-      "password": "phuc123"
+        "driver": "pg",
+        "host": { "ENV": "POSTGRES_HOST" },
+        "database": { "ENV": "POSTGRES_DB" },
+        "user": { "ENV": "POSTGRES_USER" },
+        "password": { "ENV": "POSTGRES_PASSWORD" }
     },
     "test": {
-      "driver": "pg",
-      "host": "localhost",
-      "database": "phuc_test",
-      "user": "phuc_dev",
-      "password": "phuc123"
+        "driver": "pg",
+        "host": { "ENV": "POSTGRES_HOST" },
+        "database": { "ENV": "POSTGRES_TEST_DB" },
+        "user": { "ENV": "POSTGRES_USER" },
+        "password": { "ENV": "POSTGRES_PASSWORD" }
     }
-  }
+}
