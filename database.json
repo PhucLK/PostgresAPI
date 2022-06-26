@@ -8,9 +8,9 @@
     },
     "test": {
       "driver": "pg",
-      "host": "http://localhost",
+      "host": "localhost",
       "database": "phuc_test",
-      "user": "phuc_test",
+      "user": "phuc_dev",
       "password": "phuc123"
     }
   }

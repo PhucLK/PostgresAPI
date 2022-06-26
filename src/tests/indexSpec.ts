@@ -1,38 +1,37 @@
 import { Book, BookStore } from '../models/index';
 
-const store = new BookStore()
+//const store = new BookStore()
 
 describe("Book Model", () => {
     it('should have an index method', () => {
-        expect(store.index).toBeDefined();
+        expect(BookStore.index).toBeDefined();
     });
 
     it('should have a show method', () => {
-        expect(store.index).toBeDefined();
+        expect(BookStore.show).toBeDefined();
     });
 
     it('should have a create method', () => {
-        expect(store.index).toBeDefined();
+        expect(BookStore.create).toBeDefined();
     });
 
     it('should have a update method', () => {
-        expect(store.index).toBeDefined();
+        expect(BookStore.update).toBeDefined();
     });
 
     it('should have a delete method', () => {
-        expect(store.index).toBeDefined();
+        expect(BookStore.delete).toBeDefined();
     });
 
     it('create method should add a book', async () => {
-        const result = await store.create({
+        
+        const result = await BookStore.create({
             title: 'Bridge to Terabithia',
             totalPages: 250,
             author: 'Katherine Paterson',
-            summary: 'Childrens',
-            id: 0
+            summary: 'Childrens'
         });
         expect(result).toEqual({
-            id: 1,
             title: 'Bridge to Terabithia',
             totalPages: 250,
             author: 'Katherine Paterson',
@@ -41,9 +40,8 @@ describe("Book Model", () => {
     });
 
     it('index method should return a list of books', async () => {
-        const result = await store.index();
+        const result = await BookStore.index();
         expect(result).toEqual([{
-            id: 1,
             title: 'Bridge to Terabithia',
             totalPages: 250,
             author: 'Katherine Paterson',
@@ -52,9 +50,8 @@ describe("Book Model", () => {
     });
 
     it('show method should return the correct book', async () => {
-        const result = await store.show("1");
+        const result = await BookStore.show("1");
         expect(result).toEqual({
-            id: 1,
             title: 'Bridge to Terabithia',
             totalPages: 250,
             author: 'Katherine Paterson',
@@ -63,8 +60,8 @@ describe("Book Model", () => {
     });
 
     it('delete method should remove the book', async () => {
-        store.delete("1");
-        const result = await store.index()
+        BookStore.delete("1");
+        const result = await BookStore.index()
 
         expect(result).toEqual([]);
     });

@@ -1,2 +1,2 @@
 /* Replace with your SQL commands */
-Drop table books;
+Drop table articles;

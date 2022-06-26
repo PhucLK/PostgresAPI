@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from 'express'
+import express, { Request, Response } from 'express'
 import { Article, ArticleStore } from '../models/index'
 import jwt from 'jsonwebtoken'
 
@@ -6,26 +6,31 @@ import jwt from 'jsonwebtoken'
 
 const index = async (_req: Request, res: Response) => {
     try {
-        ArticleStore.index()
-    } catch (error) {
-        console.log(error);
-        
+        const articles = await ArticleStore.index()
+        res.json(articles)
+    } catch (error: any) {
+        res.status(500)
+        res.json(error.toString())
     }
-    //const articles = await ArticleStore.index()
-    //res.json(articles)
 }
 
 const show = async (req: Request, res: Response) => {
-    const article = await ArticleStore.show(req.params.id)
-    res.json(article)
+    try {
+        const article = await ArticleStore.show(req.params.id)
+        res.json(article)
+    } catch (error: any) {
+        res.status(500)
+        res.json(error.toString())
+    }
 }
 
 const create = async (req: Request, res: Response) => {
     try {
+        console.log(req.body);
+
         const article: Article = {
-            id: req.body.id,
             title: req.body.title,
-            content: req.body.content,
+            content: req.body.content
         }
 
         const newArticle = await ArticleStore.create(article)
@@ -37,8 +42,16 @@ const create = async (req: Request, res: Response) => {
 }
 
 const destroy = async (req: Request, res: Response) => {
-    const deleted = await ArticleStore.delete(req.body.id)
-    res.json(deleted)
+    const id = req.params.id
+    const deleted = await ArticleStore.delete(id)
+    if (deleted) {
+        res.status(200)
+        res.json({ 'message': 'Delete record successfully' })
+    } else {
+        res.status(500)
+        res.json({ 'message': 'Can not delete record' })
+    }
+
 }
 
 const verifyAuthToken = (req: Request, res: Response, next: Function) => {

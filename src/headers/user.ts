@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken'
 
 const authenticate = async (req: Request, res: Response) => {
     const user: User = {
-        id: req.body.id,
         username: req.body.username,
         password: req.body.password,
     }
@@ -20,7 +19,6 @@ const authenticate = async (req: Request, res: Response) => {
 
 const create = async (req: Request, res: Response) => {
     const user: User = {
-        id: req.body.id,
         username: req.body.username,
         password: req.body.password,
     }
@@ -38,7 +36,6 @@ const create = async (req: Request, res: Response) => {
 
 const update = async (req: Request, res: Response) => {
     const user: User = {
-        id: parseInt(req.params.id),
         username: req.body.username,
         password: req.body.password,
     }

@@ -3,7 +3,6 @@ import client from '../database/index'
 import bcrypt from 'bcrypt'
 
 type Book = {
-  id: number;
   title: string;
   author: string;
   totalPages: number;
@@ -11,12 +10,10 @@ type Book = {
 }
 
 type Article = {
-  id: number;
   title: string;
   content: string;
 }
 type User = {
-  id: number;
   username: string;
   password: string;
 }
@@ -64,6 +61,23 @@ class BookStore {
       const result = await conn
         .query(sql, [b.title, b.author, b.totalPages, b.summary])
 
+      const book = result.rows[0]
+
+      conn.release()
+
+      return book
+    } catch (err) {
+      throw new Error(`Could not add new book ${b.title}. Error: ${err}`)
+    }
+  }
+
+  static async update(b: Book, id: string): Promise<Book> {
+    try {
+      const sql = 'UPDATE books set title=$1, author=$2, total_pages=$3, summary=$4 RETURNING *'
+      // @ts-ignore
+      const conn = await client.connect()
+
+      const result = await conn.query(sql, [b.title, b.author, b.totalPages, b.summary])
       const book = result.rows[0]
 
       conn.release()
@@ -145,21 +159,24 @@ class ArticleStore {
     }
   }
 
-  static async delete(id: string): Promise<Article> {
+  static async delete(id: string): Promise<boolean> {
     try {
       const sql = 'DELETE FROM articles WHERE id=($1)'
       // @ts-ignore
       const conn = await client.connect()
 
       const result = await conn.query(sql, [id])
-
-      const book = result.rows[0]
+      console.log(result);
 
       conn.release()
+      if (result.rowCount === 1) {
+        return true
+      }
+      return false;
 
-      return book
     } catch (err) {
-      throw new Error(`Could not delete article ${id}. Error: ${err}`)
+      return false;
+      //throw new Error(`Could not delete article ${id}. Error: ${err}`)
     }
   }
 }

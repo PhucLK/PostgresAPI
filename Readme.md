@@ -1,4 +1,4 @@
-# Getting Started with ImageAPI
+# Getting Started with PostgesAPI
 
 ## Available Scripts
 
@@ -6,12 +6,12 @@ In the project directory, you can run:
 
 ### `npm run start`
 
-Open http://localhost:3000/api/images?filename=fjord&width=200&height=200 to view it in your browser.
+Open http://localhost:3000/article to view all article from database to your browser.
 
 ### `npm run test`
 
 Test api/enpoint
-Test image resize functionality
+Test CRUD article functionality
 
 ### `npm run build`
 

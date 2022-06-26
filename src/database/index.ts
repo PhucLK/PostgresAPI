@@ -13,9 +13,11 @@ const {
 } = process.env
 
 let client
-//console.log(ENV)
+console.log(ENV)
 
 if(ENV === 'test') {
+  console.log('============');
+  
   client = new Pool({
     host: POSTGRES_HOST,
     database: POSTGRES_TEST_DB,
@@ -24,6 +26,8 @@ if(ENV === 'test') {
     port: parseInt(process.env.DB_PORT || "5432")
   })
 }
+
+console.log('==========end')
 
 if(ENV === 'dev') {
   client = new Pool({

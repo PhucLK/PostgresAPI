@@ -15,7 +15,6 @@ const create = async (req: Request, res: Response) => {
 
     try {
         const book: Book = {
-            id: req.body.id,
             title: req.body.title,
             author: req.body.author,
             totalPages: req.body.total_pages,
