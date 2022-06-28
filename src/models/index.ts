@@ -24,7 +24,7 @@ class BookStore {
     try {
       // @ts-ignore
       const conn = await client.connect()
-      const sql = 'SELECT * FROM books'
+      const sql = 'SELECT title, author, totalPages, summary FROM books'
 
       const result = await conn.query(sql)
 
@@ -54,7 +54,7 @@ class BookStore {
 
   static async create(b: Book): Promise<Book> {
     try {
-      const sql = 'INSERT INTO books (title, author, total_pages, summary) VALUES($1, $2, $3, $4) RETURNING *'
+      const sql = 'INSERT INTO books (title, author, totalPages, summary) VALUES($1, $2, $3, $4) RETURNING title, author, totalPages, summary'
       // @ts-ignore
       const conn = await client.connect()
 
@@ -73,7 +73,7 @@ class BookStore {
 
   static async update(b: Book, id: string): Promise<Book> {
     try {
-      const sql = 'UPDATE books set title=$1, author=$2, total_pages=$3, summary=$4 RETURNING *'
+      const sql = 'UPDATE books set title=$1, author=$2, totalPages=$3, summary=$4 RETURNING title, author, totalPages, summary'
       // @ts-ignore
       const conn = await client.connect()
 

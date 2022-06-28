@@ -1,6 +1,12 @@
 import { Book, BookStore } from '../models/index';
 
 //const store = new BookStore()
+const book = {
+    title: 'Bridge to Terabithia',
+    totalPages: 250,
+    author: 'Katherine Paterson',
+    summary: 'Childrens'
+}
 
 describe("Book Model", () => {
     it('should have an index method', () => {
@@ -24,45 +30,30 @@ describe("Book Model", () => {
     });
 
     it('create method should add a book', async () => {
-        
-        const result = await BookStore.create({
-            title: 'Bridge to Terabithia',
-            totalPages: 250,
-            author: 'Katherine Paterson',
-            summary: 'Childrens'
-        });
-        expect(result).toEqual({
-            title: 'Bridge to Terabithia',
-            totalPages: 250,
-            author: 'Katherine Paterson',
-            summary: 'Childrens'
-        });
+        const result = await BookStore.create(book);
+        console.log(result);
+
+        expect(result).toEqual(book);
     });
 
     it('index method should return a list of books', async () => {
         const result = await BookStore.index();
-        expect(result).toEqual([{
-            title: 'Bridge to Terabithia',
-            totalPages: 250,
-            author: 'Katherine Paterson',
-            summary: 'Childrens'
-        }]);
+        console.log('result');
+        console.log(result);
+        
+        expect(result).toEqual([book]);
     });
 
     it('show method should return the correct book', async () => {
         const result = await BookStore.show("1");
-        expect(result).toEqual({
-            title: 'Bridge to Terabithia',
-            totalPages: 250,
-            author: 'Katherine Paterson',
-            summary: 'Childrens'
-        });
+        expect(result).toEqual(book);
     });
 
     it('delete method should remove the book', async () => {
         BookStore.delete("1");
-        const result = await BookStore.index()
+        const result = await BookStore.show('1')
+        console.log('result : ' + result);
 
-        expect(result).toEqual([]);
+        expect(result).not.toBeDefined();
     });
 });
